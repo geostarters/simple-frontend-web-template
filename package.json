@@ -19,10 +19,13 @@
   },
   "homepage": "https://github.com/geostarters/simple-frontend-web-template#readme",
   "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "babelify": "^10.0.0",
     "browserify": "^16.5.0",
-    "watchify": "^3.11.1",
+    "npm-run-all": "^4.1.5",
     "st": "^1.2.2",
-    "npm-run-all": "^4.1.5"
+    "watchify": "^3.11.1"
   },
   "files": [
     "dist/",
@@ -30,9 +33,9 @@
     "server/"
   ],
   "scripts": {
-    "build-dev": "browserify src/index.js --debug --ignore-transform unassertify --standalone simple-frontend-web-template > dist/bundle.js",
-    "watch-dev": "watchify src/index.js --debug --ignore-transform unassertify --standalone simple-frontend-web-template --outfile dist/bundle-dev.js --verbose",
-    "build-min": "browserify src/index.js --debug --plugin [minifyify --map bundle.js.map --output dist/bundle.js.map] --standalone simple-frontend-web-template | derequire > dist/bundle.js",
+    "build-dev": "browserify src/index.js -t babelify --standalone simple-frontend-web-template > dist/bundle.js",
+    "watch-dev": "watchify src/index.js -t babelify  --standalone simple-frontend-web-template --outfile dist/bundle-dev.js --verbose",
+    "build-min": "browserify src/index.js -t babelify --debug --plugin [minifyify --map bundle.js.map --output dist/bundle.js.map] --standalone simple-frontend-web-template | derequire > dist/bundle.js",
     "start-server": "st --no-cache -H 127.0.0.1 --port 9966 --index index.html .",
     "start": "run-p watch-dev build-dev start-server open",
     "open": "node server/dev-server.js"
