@@ -41,7 +41,7 @@
     "open": "node server/dev-server.js"
   },
   "dependencies": {
-    "@geostarters/eslint-config": "0.0.3",
+    "@geostarters/eslint-config": "0.0.6",
     "opn": "^6.0.0"
   }
 }
